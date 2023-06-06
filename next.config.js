@@ -10,6 +10,7 @@ const nextConfig = {
       },
     ],
   },
+  pageExtensions: ['store.ts']
 }
 
 module.exports = nextConfig
