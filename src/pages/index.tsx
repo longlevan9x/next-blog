@@ -7,10 +7,10 @@ import MainPage from "@/components/layouts/MainPage";
 import {useDispatch} from "react-redux";
 import {setMeta} from "@/reducers/headMetaSlice";
 import {useEffect} from "react";
-import {AppDispatch} from "@/pages/store";
 import CategoryCarousel from "@/components/homes/CategoryCarousel";
 import SliderCarousel from "@/components/homes/SliderCarousel";
 import MaterialDesignBlogPage from "@/components/homes/MaterialDesignBlogPage";
+import {AppDispatch} from "@/stores/store";
 
 const inter = Inter({subsets: ['latin']})
 

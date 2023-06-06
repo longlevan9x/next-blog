@@ -4,7 +4,7 @@ import Head from "next/head";
 import MenuPage from "@/components/layouts/MenuPage";
 import FooterPage from "@/components/layouts/FooterPage";
 import {useSelector} from "react-redux";
-import {RootState} from "@/pages/store";
+import {RootState} from "@/stores/store";
 
 interface MainTemplateProps {
     children: React.ReactNode;
