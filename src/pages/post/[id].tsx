@@ -7,7 +7,7 @@ import NotionRender from "@/components/templates/NotionRender";
 import {useDispatch} from "react-redux";
 import {setMeta} from "@/reducers/headMetaSlice";
 import {useEffect} from "react";
-import {AppDispatch} from "@/pages/store";
+import {AppDispatch} from "@/stores/store";
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const id: any = context.params?.id;
