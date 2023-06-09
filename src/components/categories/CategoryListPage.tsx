@@ -1,6 +1,7 @@
 import React from "react";
 import {useRouter} from "next/router";
 import Link from "next/link";
+import Image from "next/image";
 
 const CategoryListPage = () => {
     const router = useRouter();
@@ -74,9 +75,11 @@ const CategoryListPage = () => {
             <h1 className="text-3xl font-bold mb-4">Danh sách danh mục</h1>
             <div className="columns-3 gap-10">
                 {categories.map((category) => (
-                    <Link className="relative" href="/post"  key={category.id}>
-                        <img src={category.image} alt={category.name}
-                             className="mb-10 w-full aspect-auto transform transition duration-300 hover:scale-105 min-h-[380px]"/>
+                    <Link className="relative" href="/post" key={category.id}>
+                        <Image src={category.image} alt={category.name}
+                               width={380}
+                               height={380}
+                               className="mb-10 w-full aspect-auto transform transition duration-300 hover:scale-105 min-h-[380px]"/>
                         <h2 className="absolute top-1/2 left-1/3 text-3xl font-bold mb-2">{category.name}</h2>
                     </Link>
                 ))}

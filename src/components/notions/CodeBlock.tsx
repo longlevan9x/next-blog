@@ -14,7 +14,7 @@ const CodeBlock = ({children, language}: CodeBlockProps) => {
     let textRef = useRef<HTMLDivElement>(null);
     let [isCopied, setIsCopied] = useState(false);
 
-    useEffect(() => setLang(language ? `language-${language}` : "language-markup"), [])
+    useEffect(() => setLang(language ? `language-${language}` : "language-markup"), [language])
 
 
     useEffect(() => {

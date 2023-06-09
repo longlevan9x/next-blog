@@ -17,7 +17,8 @@ const RenderListView = ({posts}: PostViewProps) => {
         <>
             <div className="grid grid-cols-1 gap-8">
                 {posts.map((post) => (
-                    <div key={post.id} className="flex bg-white shadow-md transform transition duration-300 hover:scale-105 min-h-[380px]">
+                    <div key={post.id}
+                         className="flex bg-white shadow-md transform transition duration-300 hover:scale-105 min-h-[380px]">
                         <div className="grid grid-cols-5">
                             <div className="col-span-2">
                                 <Image src={getCover(post.cover)}
@@ -32,8 +33,10 @@ const RenderListView = ({posts}: PostViewProps) => {
                             <div className="flex flex-col p-6 col-span-3 justify-between">
                                 <div>
                                     <div className="flex flex-row items-center text-gray-500 mb-2">
-                                        <img className="h-12 w-12 flex-none rounded-full bg-gray-50"
-                                             src="/images/doremon.png" alt=""/>
+                                        <Image className="h-12 w-12 flex-none rounded-full bg-gray-50"
+                                               width={12}
+                                               height={12}
+                                               src="/images/doremon.png" alt=""/>
                                         <div className="flex flex-col ml-5 justify-items-start">
                                             <span>{getAuthor(post.authors)}</span>
                                             <span>{getPublishedDate(post.published)}</span>

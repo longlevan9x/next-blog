@@ -8,6 +8,7 @@ import {Autoplay, Navigation, Pagination} from "swiper";
 import {Transition} from '@headlessui/react';
 import {useEffect, useState} from "react";
 import {SliderModel} from "@/models/slider";
+import Image from "next/image";
 
 const SliderCarousel = ({sliders}: {sliders: SliderModel[]} ) => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -39,7 +40,7 @@ const SliderCarousel = ({sliders}: {sliders: SliderModel[]} ) => {
                 {sliders.map((slider: SliderModel) => (
                     <SwiperSlide key={slider.id}>
                         <div className="relative h-full">
-                            <img className="w-full h-full object-cover" src={slider.files?.length ? slider.files[0].url : ''} alt="Slide 1"/>
+                            <Image className="w-full h-full object-cover" width={10000} height={10000} src={slider.files?.length ? (slider.files[0].url || '') : ''} alt="Slide 1"/>
                             <Transition
                                 show={!isScrolled}
                                 enter="transition-opacity duration-500"

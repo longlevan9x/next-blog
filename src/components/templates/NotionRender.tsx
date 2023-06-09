@@ -55,7 +55,8 @@ export const NotionElementToReact = (content: any, _index: number, contents: Arr
 
     let typeExist = content && "type" in content;
     let type = content.type;
-    let text = RichTextToReact(content[type].rich_text ?? []);
+
+    let text = RichTextToReact(content[type]?.rich_text ?? []);
     if (typeExist) {
         // Paragraph
 

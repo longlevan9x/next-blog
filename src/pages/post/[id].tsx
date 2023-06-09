@@ -8,6 +8,8 @@ import {useDispatch} from "react-redux";
 import {setMeta} from "@/reducers/headMetaSlice";
 import {useEffect} from "react";
 import {AppDispatch} from "@/stores/store";
+import Image from "next/image";
+import {getAuthor, getCover, getPublishedDate} from "@/libs/ultil";
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const id: any = context.params?.id;
@@ -18,7 +20,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     return {
         props: {
             post: resPost.data,
-            blocks: resBlock.data.results,
+            blocks: resBlock.data,
             pageId: id
         },
     };
@@ -47,16 +49,16 @@ const PostDetailPage = ({post, blocks}: { post: PostModel, blocks: any }) => {
 
     useEffect(() => {
         dispatch(setMeta({siteTitle: post.title, siteDescription: post.description, ogImage: post.cover, url: pathname}));
-    }, [dispatch]);
+    }, [dispatch, pathname, post]);
 
 
     return (
         <MainPage>
             <div className="max-w-5xl mx-auto mt-44">
                 <div className="mx-auto">
-                    <img src={post.cover} alt="Post Image" className="w-full mb-4"/>
-                    <h2 className="text-3xl font-bold mb-4">Title of the Post</h2>
-                    <p className="text-gray-500 mb-4">Published on June 1, 2023 by John Doe</p>
+                    <Image src={getCover(post.cover)} alt="Post Image" className="w-full mb-4" width={1000} height={1000}/>
+                    <h2 className="text-3xl font-bold mb-4">{post.title}</h2>
+                    <p className="text-gray-500 mb-4">{getPublishedDate(post.published)} - {getAuthor(post.authors)}</p>
                     <NotionRender contents={blocks}/>
                 </div>
             </div>
