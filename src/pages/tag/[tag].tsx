@@ -13,7 +13,7 @@ import Link from "next/link";
 export const getStaticProps: GetStaticProps = async (context) => {
     const tag: any = context.params?.tag;
     const resPost = await Api.getPosts({tags: [tag]});
-    console.log(resPost.config);
+
     return {
         props: {
             posts: resPost.data,
