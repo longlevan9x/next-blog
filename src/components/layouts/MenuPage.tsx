@@ -3,6 +3,17 @@ import Link from 'next/link';
 import {MoonIcon, SunIcon} from "@heroicons/react/20/solid";
 import {useTheme} from "next-themes";
 
+const navs = [
+    {
+        name: 'Post',
+        path: '/post'
+    },
+    {
+        name: 'Tag',
+        path: '/tag'
+    },
+];
+
 const MenuPage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [headerHeight, setHeaderHeight] = useState(0);
@@ -21,8 +32,8 @@ const MenuPage = () => {
             const headerMenu: any = document.getElementById('header');
             const headerMenuHeight = headerMenu.offsetHeight;
             setHeaderHeight(headerMenuHeight);
-            setHeaderColorClass('bg-gray-50');
-            setTextColorClass('text-zinc-900');
+            setHeaderColorClass('');
+            setTextColorClass('text-zinc-900 dark:text-white');
         }
 
         const handleScroll = () => {
@@ -30,8 +41,8 @@ const MenuPage = () => {
                 const sliderBottom = sliderSection.offsetTop + sliderSection.offsetHeight;
 
                 if (window.pageYOffset >= sliderBottom) {
-                    setHeaderColorClass('bg-gray-50');
-                    setTextColorClass('text-zinc-900');
+                    setHeaderColorClass('');
+                    setTextColorClass('text-zinc-900 dark:text-white');
                 } else {
                     setHeaderColorClass('bg-gray-50 bg-opacity-20');
                     setTextColorClass('text-white');
@@ -60,38 +71,26 @@ const MenuPage = () => {
 
     return (
         <nav
-            className={`fixed inset-x-0 top-0 z-10 right-0 py-3 transition-colors duration-300 ${headerColorClass}`}
+            className={`fixed inset-x-0 top-0 z-10 right-0 py-3 transition-colors duration-300 ` + (!headerColorClass ? 'bg-white dark:bg-zinc-900' : 'bg-transparent')}
             id="header" style={{marginBottom: `${headerHeight}px`}}>
             <div className="container mx-auto py-4 px-6">
                 <div className="flex items-center justify-between">
                     <div>
-                        <Link href="/" className={`text-2xl font-bold ${textColorClass}`}>
+                        <Link href="/"
+                              className={`transition-colors duration-300 hover:text-gray-300 text-2xl font-bold ${textColorClass}`}>
                             My Blog
                         </Link>
                     </div>
                     <div className="hidden md:block">
                         <ul className="flex items-center space-x-4">
-                            <li>
-                                <Link href="/post"
-                                      className={`transition-colors duration-300 hover:text-gray-300 ${textColorClass}`}
-                                      passHref>
-                                    Posts
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/category"
-                                      className={`transition-colors duration-300 hover:text-gray-300 ${textColorClass}`}
-                                      passHref>
-                                    Category
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/contact"
-                                      className={`transition-colors duration-300 hover:text-gray-300 ${textColorClass}`}
-                                      passHref>
-                                    Contact
-                                </Link>
-                            </li>
+                            {navs.map((nav) => (
+                                <li key={nav.name}>
+                                    <Link href={nav.path}
+                                          className={`font-bold transition-colors duration-300 hover:text-gray-300 ${textColorClass}`}>
+                                        {nav.name}
+                                    </Link>
+                                </li>
+                            ))}
                             <li>
                                 <button onClick={handleThemeToggle}
                                         className={`bg-transparent border border-${isDarkMode ? 'white' : 'gray-900'} hover:border-${isDarkMode ? 'gray-900' : 'white'} text-${isDarkMode ? 'white' : 'gray-900'} rounded-full p-2`}

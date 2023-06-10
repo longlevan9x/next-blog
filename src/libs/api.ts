@@ -8,7 +8,12 @@ const axiosClient = axios.create({
 });
 
 export default class Api {
-    static getPosts(params: { keyword?: string, limit?: number } = {}) {
+    static getPosts(params: { keyword?: string, limit?: number, tags?: any[] | string } = {}) {
+
+        if (params.tags) {
+            params.tags = params.tags.toString();
+        }
+
         return axiosClient.get('app/posts', {params});
     }
 

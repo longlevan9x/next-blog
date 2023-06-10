@@ -11,33 +11,47 @@ import CategoryCarousel from "@/components/homes/CategoryCarousel";
 import SliderCarousel from "@/components/homes/SliderCarousel";
 import MaterialDesignBlogPage from "@/components/homes/MaterialDesignBlogPage";
 import {AppDispatch} from "@/stores/store";
+import TagCarousel from "@/components/homes/TagCarousel";
+import {TagModel} from "@/models/tag";
 
 const inter = Inter({subsets: ['latin']})
 
 
 interface HomeProps {
     posts: PostModel[],
-    sliders: SliderModel[]
+    sliders: SliderModel[],
+    tags: TagModel[]
+}
+
+const handleResponseError = (res: any) => {
+    if (res.status === 'rejected') {
+        console.log(res.reason.response);
+    }
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    const resPosts = await Api.getPosts({limit: 8});
-    const posts = resPosts.data;
+    const pPost = Api.getPosts({limit: 8});
+    const pSlider = Api.getSliders();
+    const pTag = Api.getTags();
 
-    const resSliders = await Api.getSliders();
-    const sliders = resSliders.data;
+    const [resPosts, resSliders, resTag]: any = await Promise.allSettled([pPost, pSlider, pTag]);
+
+    const posts = resPosts?.value?.data || [];
+    const sliders = resSliders?.value?.data || [];
+    const tags = resTag?.value?.data || [];
 
     return {
         props: {
             posts,
-            sliders
+            sliders,
+            tags
         },
         revalidate: 10,
     };
 };
 
 
-const Home = ({posts, sliders}: HomeProps) => {
+const Home = ({posts, sliders, tags}: HomeProps) => {
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
@@ -48,6 +62,7 @@ const Home = ({posts, sliders}: HomeProps) => {
         <MainPage>
             <SliderCarousel sliders={sliders}></SliderCarousel>
             <CategoryCarousel></CategoryCarousel>
+            <TagCarousel tags={tags}></TagCarousel>
             <MaterialDesignBlogPage posts={posts}></MaterialDesignBlogPage>
         </MainPage>
     );
