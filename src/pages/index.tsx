@@ -61,9 +61,8 @@ const Home = ({posts, sliders, tags}: HomeProps) => {
     return (
         <MainPage>
             <SliderCarousel sliders={sliders}></SliderCarousel>
-            <CategoryCarousel></CategoryCarousel>
             <TagCarousel tags={tags}></TagCarousel>
-            <MaterialDesignBlogPage posts={posts}></MaterialDesignBlogPage>
+            <MaterialDesignBlogPage posts={posts} title={'Bài viết nổi bật'}></MaterialDesignBlogPage>
         </MainPage>
     );
 };

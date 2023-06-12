@@ -1,3 +1,4 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
 import React from "react";
 import {Autoplay, Navigation} from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
@@ -31,19 +32,37 @@ const TagCarousel = ({tags}: TagCarouselProps) => {
                         <p className="dark:text-gray-50 text-gray-700 text-lg">Xem toàn bộ danh sách các thẻ đặc sắc</p>
                     </div>
                 </div>
-                <div className="col-span-3">
+                <div className="col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-3">
                     <Swiper
                         modules={[Autoplay, Navigation]}
                         slidesPerView={3}
+                        breakpoints={{
+                            [parseInt(defaultTheme.screens["2xl"])]: {
+                                slidesPerView: 3,
+                            },
+                            [parseInt(defaultTheme.screens["xl"])]: {
+                                slidesPerView: 3,
+                            },
+                            [parseInt(defaultTheme.screens["lg"])]: {
+                                slidesPerView: 2,
+                            },
+                            [parseInt(defaultTheme.screens["md"])]: {
+                                slidesPerView: 2,
+                            },
+                            [parseInt(defaultTheme.screens["sm"])]: {
+                                slidesPerView: 1,
+                            }
+                        }}
                         navigation
                         spaceBetween={30}
                     >
                         {tags.map((tag, index) => (
                             <SwiperSlide key={index}>
-                                <div className={`flex flex-col-reverse bg-white h-80 bg-cover bg-no-repeat bg-center`} style={{backgroundColor: tag.color}}>
-                                    <div className="backdrop-hue-rotate-30 bg-black/30 p-6 ">
-                                        <h3 className="text-gray-50 text-3xl font-bold mb-2">{tag.name}</h3>
-                                    </div>
+                                <div className={`flex flex-col-reverse bg-white h-80 bg-cover bg-no-repeat bg-center`}
+                                     style={{backgroundColor: tag.color}}>
+                                    <Link href={'/tag/' + tag.name} className="backdrop-hue-rotate-30 bg-black/30 p-6 ">
+                                        <h3 className="text-gray-50 text-3xl font-bold mb-2 hover:text-blue-400">{tag.name}</h3>
+                                    </Link>
                                 </div>
                             </SwiperSlide>
                         ))}

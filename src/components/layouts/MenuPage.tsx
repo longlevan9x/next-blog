@@ -71,7 +71,7 @@ const MenuPage = () => {
 
     return (
         <nav
-            className={`fixed inset-x-0 top-0 z-10 right-0 py-3 transition-colors duration-300 ` + (!headerColorClass ? 'bg-white dark:bg-zinc-900' : 'bg-transparent')}
+            className={`fixed inset-x-0 top-0 z-10 right-0 py-3 transition-colors duration-300   ` + (!headerColorClass ? 'shadow bg-white dark:bg-zinc-900' : 'bg-transparent')}
             id="header" style={{marginBottom: `${headerHeight}px`}}>
             <div className="container mx-auto py-4 px-6">
                 <div className="flex items-center justify-between">

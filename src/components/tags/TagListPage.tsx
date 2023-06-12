@@ -16,19 +16,19 @@ const TagListPage = ({tags}: TagListPageProps) => {
                 {tags.map((tag) => (
                     <Link
                         href={`/tag/${tag.name}`}
-                        className="text-white px-2 py-1 mr-2 bg-gray-700 border border-cyan-600 cursor-pointer transform transition duration-300 hover:scale-105"
+                        className="text-white px-2 py-1 mr-2 bg-gray-700 border border-cyan-600 cursor-pointer transform transition duration-300 hover:scale-95"
                         key={tag.name}>
                         {tag.name}
                     </Link>
                 ))}
             </div>
-            <main
+            <div
                 className="grid min-h-full place-items-center bg-white dark:bg-transparent py-10">
                 <div className="text-center">
                     <Image src="/images/eye.png" className="w-full h-full" alt="example" width={500}
                            height={500}></Image>
                 </div>
-            </main>
+            </div>
         </div>
     );
 };

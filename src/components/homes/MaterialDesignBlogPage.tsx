@@ -7,7 +7,7 @@ import {FaArrowRight} from "react-icons/fa";
 import {BiCalendarAlt, BiUser} from "react-icons/bi";
 import Image from "next/image";
 
-const MaterialDesignBlogPage = ({posts}: any) => {
+const MaterialDesignBlogPage = ({posts, title}: {posts: PostModel[], title: string}) => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -30,9 +30,13 @@ const MaterialDesignBlogPage = ({posts}: any) => {
     }, []);
 
     return (
-        <div className="container mx-auto py-8">
-            <h2 className="text-3xl font-bold text-center mb-8">Latest Posts</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-8">
+        <div className="container mx-auto py-16">
+            <div className="flex justify-between items-center mb-4">
+                <h2 className="text-3xl font-bold">{title}</h2>
+                <button className="px-4 py-2 bg-blue-500 text-white  hover:bg-blue-600">Xem thêm</button>
+            </div>
+            <div
+                className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-8">
                 {posts.map((post: PostModel) => (
                     <Transition
                         key={post.id}
@@ -46,7 +50,7 @@ const MaterialDesignBlogPage = ({posts}: any) => {
                     >
                         <div
                             key={post.id}
-                            className="bg-white  shadow-md overflow-hidden transform transition duration-300 hover:scale-105 min-h-[400px]"
+                            className="bg-white shadow-md overflow-hidden transform transition duration-300 hover:scale-95 min-h-[400px]"
                         >
                             <Link href={`post/${post.id}`}>
                                 <Image

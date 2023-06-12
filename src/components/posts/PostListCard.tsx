@@ -18,7 +18,7 @@ const RenderListView = ({posts}: PostViewProps) => {
             <div className="grid grid-cols-1 gap-8">
                 {posts.map((post) => (
                     <div key={post.id}
-                         className="flex bg-white shadow-md transform transition duration-300 hover:scale-105 min-h-[380px]">
+                         className="flex bg-white shadow-md transform transition duration-300 hover:scale-95 min-h-[380px]">
                         <div className="grid grid-cols-5">
                             <div className="col-span-2">
                                 <Image src={getCover(post.cover)}
@@ -69,7 +69,7 @@ const RenderGridView = ({posts}: PostViewProps) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post) => (
                 <div key={post.id}
-                     className="bg-white shadow-md  transform transition duration-300 hover:scale-105 min-h-[400px]">
+                     className="bg-white shadow-md  transform transition duration-300 hover:scale-95 min-h-[400px]">
                     <div className="h-52">
                         <Image src={getCover(post.cover)} alt={post.title || ''} width={400} height={100}
                                className="w-full h-52 object-cover" onError={(e) => onCoverError(e)}/>
